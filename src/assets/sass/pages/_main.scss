@@ -1,0 +1,273 @@
+@use '../abstract/variables';
+@use '../abstract/mixins';
+
+#container {
+    position: relative;
+    height: 100vh;
+    //max-width: 375px;
+    //height: 812px;
+    //border: 1px solid #000;
+}
+
+.page-title {
+    padding: 20px 15px;
+}
+
+.calendar-wrap {
+    margin-top: 60px;
+
+    .month-wrap {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        padding: 30px 0;
+
+        .prev {}
+    }
+}
+
+.calendar {
+    .cal-header {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        border-top: 1px solid #eee;
+        border-bottom: 1px solid #eee;
+
+        .day {
+            text-align: center;
+            padding: 10px 0;
+
+            &:nth-of-type(7n - 1) {
+                color: blue;
+            }
+            &:nth-of-type(7n) {
+                color: red;
+            }
+        }
+    }
+    .cal-content {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+
+        .date {
+            text-align: center;
+            //height: 65px;
+            height: 10vh;
+            padding: 5px;
+            border-bottom: 1px solid #eee;
+            position: relative;
+            cursor: pointer;
+
+            &:nth-of-type(7n - 1) {
+                color: blue;
+            }
+            &:nth-of-type(7n) {
+                color: red;
+            }
+
+            &.disable {
+                color: #ddd;
+            }
+
+            &.today {
+                background: rgb(variables.$company-color, 0.15);
+                font-weight: 700;
+            }
+
+            .mark {
+                position: absolute;
+                left: 50%;
+                top: 55%;
+                transform: translateX(-50%);
+            }
+        }
+    }
+}
+
+
+.memory-wrap {
+    margin-top: 60px;
+
+    .top {
+        padding-top: 10px;
+
+        .wrap {
+            padding: 0 10px 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            input {
+                background-color: #eee;
+                width: calc(100% - 70px);
+                padding: 10px;
+            }
+
+            .btn-filter {
+                width: 60px;
+                height: 40px;
+                border: 1px solid variables.$company-color;
+                color: variables.$company-color;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                cursor: pointer;
+
+                span {
+                    color: inherit;
+                    font: inherit;
+                }
+            }
+
+            .total {
+
+            }
+
+            .btn-add {
+                background-color: variables.$company-color;
+                color: #fff;
+                width: 60px;
+                height: 40px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                cursor: pointer;
+
+                span {
+                    color: inherit;
+                    font: inherit;
+                }
+            }
+        }
+    }
+
+    .list {
+        height: calc(100vh - 170px);
+        overflow-y: scroll;
+
+        .item {
+
+
+            &>a {
+                display: flex;
+                padding: 15px 0;
+                background-color: #fff;
+                margin: 0 15px;
+                border-bottom: 1px solid #ddd;
+            }
+
+            .img {
+                //border-radius: 10px;
+                width: 30%;
+                height: auto;
+                aspect-ratio: 1 / 1;
+                overflow: hidden;
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    object-position: center center;
+                }
+            }
+
+            .text {
+                width: calc(70%);
+                position: relative;
+                padding: 10px;
+
+                .edit {
+                    position: absolute;
+                    right: 0;
+                    top: 0;
+                }
+
+                .desc {
+                    @include mixins.ellipsis(2);
+                    line-height: 1.4;
+                    padding-right: 30px;
+                }
+
+                .date {
+                    font-size: 0.8rem;
+                    margin-top: 1em;
+                }
+            }
+        }
+    }
+
+
+    &.view {
+        height: calc(100vh - 60px);
+        overflow-y: scroll;
+
+        .swiper-container {
+            height: 100vw;
+            overflow: hidden;
+        }
+
+        .swiper-slide {
+            width: 100%;
+            height: 100%;
+
+            img {
+                @include mixins.objectFitImg(cover, center center);
+            }
+        }
+
+        .swiper-pagination-bullet-active {
+            background: variables.$company-color !important;
+        }
+
+        .inner {
+            padding: 15px;
+
+            .top {
+                padding-bottom: 10px;
+                margin-bottom: 20px;
+                border-bottom: 1px solid #ddd;
+                position: relative;
+
+                p {
+                    padding-bottom: 10px;
+                }
+
+                .btn-modal {
+                    cursor: pointer;
+                    position: absolute;
+                    right: 0;
+                    top: 0;
+                    width: 30px;
+                    height: 30px;
+                    border-radius: 50%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+
+                    i {
+                        height: 1rem;
+                    }
+
+                    @media (hover: hover) {
+                        &:hover {
+                            background-color: #efefef;
+                        }
+                    }
+                }
+            }
+        }
+
+        .memory-category {
+            display: inline-block;
+            padding: 5px 10px;
+            border: 1px solid variables.$company-color;
+            color: variables.$company-color;
+            border-radius: 15px;
+            margin-right: 10px;
+        }
+
+        .memory-content {
+            line-height: 1.9;
+        }
+    }
+}

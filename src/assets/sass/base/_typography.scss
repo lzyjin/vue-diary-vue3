@@ -1,0 +1,8 @@
+@use '../abstract/mixins';
+
+// 나눔스퀘어 네오
+@include mixins.font-face('NanumSquareNeo', '../../assets/font/NanumSquareNeoTTF-aLt.woff', 900, normal, woff);
+@include mixins.font-face('NanumSquareNeo', '../../assets/font/NanumSquareNeoTTF-dEb.woff', 800, normal, woff);
+@include mixins.font-face('NanumSquareNeo', '../../assets/font/NanumSquareNeoTTF-cBd.woff', 700, normal, woff);
+@include mixins.font-face('NanumSquareNeo', '../../assets/font/NanumSquareNeoTTF-bRg.woff', 400, normal, woff);
+@include mixins.font-face('NanumSquareNeo', '../../assets/font/NanumSquareNeoTTF-aLt.woff', 300, normal, woff);

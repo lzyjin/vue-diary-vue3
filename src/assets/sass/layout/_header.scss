@@ -1,0 +1,79 @@
+@use '../abstract/variables';
+@use '../abstract/animations';
+@use '../abstract/mediaQuery';
+
+header {
+    position: absolute;
+    width: 100%;
+    height: 60px;
+    background: #fff;
+    border-bottom: 1px solid #ddd;
+
+    .wrap {
+        height: 100%;
+        padding: 0 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .home {
+
+    }
+
+    .ham {
+        margin-left: auto;
+        cursor: pointer;
+
+        i {
+            font-size: 1.5rem;
+        }
+    }
+}
+
+.menu {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: #fff;
+    z-index: 5;
+
+    .top {
+        width: 100%;
+        height: 60px;
+        border-bottom: 1px solid #ddd;
+        position: relative;
+
+        .btn-close {
+            cursor: pointer;
+            position: absolute;
+            right: 20px;
+            top: 15px;
+
+            i {
+                font-size: 1.5rem;
+            }
+        }
+    }
+
+    nav {
+        .link {
+            display: block;
+            padding: 1em;
+            position: relative;
+
+            &::after {
+                // content: '\e93e'; // xi-angle-right
+                content: '\e93f'; // xi-angle-right-min
+                font-family : xeicon;
+                position: absolute;
+                right: 20px;
+                top: 50%;
+                transform: translate3d(0, -50%, 0);
+            }
+
+        }
+    }
+}

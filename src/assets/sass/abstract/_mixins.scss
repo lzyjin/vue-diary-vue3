@@ -1,0 +1,136 @@
+// font-face
+@mixin font-face($name, $path, $weight: null, $style: null, $exts: otf ttf) {
+    $src: null;
+    $formats: (
+        otf: 'opentype',
+        ttf: 'truetype',
+        woff: 'woff'
+    );
+    @each $ext in $exts {
+        $format: map-get($formats, $ext);
+        $src: append($src, url(quote($path)) format(quote($format)), comma);
+    }
+    @font-face {
+        font-family: quote($name);
+        font-style: $style;
+        font-weight: $weight;
+        src: $src;
+    }
+}
+// 사용:
+// @include font-face('Note Serif', '../fonts/NotoSerif-Regular.otf', 400,  null, otf);
+
+// IR기법(접근성을 위한 대체 텍스트 표시)
+@mixin blind {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    border: 0;
+    white-space: nowrap;
+    clip: rect(0, 0, 0, 0);
+}
+
+// 말줄임(...)
+@mixin ellipsis($lines: 1) {
+    @if ($lines==1) {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    } @else {
+        display: -webkit-box;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        -webkit-line-clamp: $lines;
+        -webkit-box-orient: vertical;
+    }
+}
+
+// 요소 중앙정렬
+@mixin center-element {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+// flex
+@mixin flex($direction, $justify, $align, $gap) {
+    display: flex;
+    flex-direction: $direction;
+    justify-content: $justify;
+    align-items: $align;
+    gap: $gap;
+}
+
+// li dot marker
+@mixin list-marker($background-color: #000, $top: 0, $width: 3, $padding-left: 10) {
+    position: relative;
+    padding-left: $padding-left + px;
+
+    &::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: $top + px;
+        width: $width + px;
+        height: $width + px;
+        border-radius: 50%;
+        background-color: $background-color;
+    }
+}
+// 사용:
+// li에 @include mixins.list-marker(#fff, 15, 3, 10);
+
+// 구분선
+@mixin division-bar($width, $height, $background-color, $margin, $top: 0) {
+    position: relative;
+    margin-right: $margin;
+    padding-right: $margin;
+
+    &::after {
+        content: '';
+        position: absolute;
+        right: 0;
+        top: $top;
+        z-index: 10;
+        width: $width;
+        height: $height;
+        background: $background-color;
+    }
+
+    &:last-of-type::after {
+        display: none;
+    }
+}
+// 사용:
+// @include mixins.division-bar(1px, 12px, #888, 17px, 11px);
+
+// vender prefix
+$set-prefix: '', '-moz-', '-webkit-';
+
+@mixin ProprtySetPrefix($name, $value) {
+    @each $prefix in $set-prefix {
+        #{$prefix}#{$name}: $value;
+    }
+}
+
+@mixin ValueSetPrefix($name, $value) {
+    @each $prefix in $set-prefix {
+        #{$name}: #{$prefix}$value;
+    }
+}
+// 사용:
+// @include ProprtySetPrefix(transition, 0.2s);
+
+// object-fit img
+@mixin objectFitImg($fit, $position) {
+    width: 100%;
+    height: 100%;
+    object-fit: $fit;
+    object-position: $position;
+}
+
+//  RETINA-READY IMAGES
+// https://www.developerdrive.com/10-best-sass-mixins-for-web-developers/

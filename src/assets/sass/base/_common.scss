@@ -1,0 +1,130 @@
+@use '../abstract/mixins';
+@use '../abstract/animations';
+@use '../abstract/mediaQuery';
+
+// 폰트, 폰트사이즈, 폰트컬러, 자간 기본설정
+html, body {
+    font-family: 'NanumSquareNeo', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    color: #333;
+    scroll-behavior: smooth;
+    letter-spacing: -0.025em;
+}
+
+
+
+#container {
+    overflow: hidden;
+}
+
+
+
+// 컨텐츠 최소 너비
+$contentWidths: '1500', '1400', '1300', '1222', '1200', '1100';
+
+@each $width in $contentWidths {
+    .w#{$width} {
+        max-width: #{$width}px;
+        margin: 0 auto;
+    }
+
+    // 반응형
+    @include mediaQuery.media-query(desktop-l) {
+        .w#{$width} {
+            max-width: 100%;
+            padding: 0 4%;
+        }
+    }
+    @include mediaQuery.media-query(mobile-l) {
+        .w#{$width} {
+            max-width: #{$width}px;
+            padding: 0;
+        }
+    }
+
+
+}
+
+
+
+// IR 기법
+.blind {
+    @include mixins.blind;
+}
+
+
+
+// 반응형 줄바꿈 처리
+// pc일 때 줄바꿈, mobile일 때 줄 안바꿈
+em.br {
+    display: block;
+}
+@include mediaQuery.media-query(mobile-s) {
+    em.br {
+        display: inline;
+    }
+}
+
+// pc일 때 줄 안바꿈, mobile 줄 바꿈
+em.mo-br {
+    display: inline;
+}
+@include mediaQuery.media-query(mobile-s) {
+    em.mo-br {
+        display: block;
+    }
+}
+
+.mo-block {
+    display: none;
+}
+.mo-none {
+    display: block;
+}
+@media screen and (max-width: 768px) {
+    .mo-block {
+        display: block;
+    }
+    .mo-none {
+        display: none;
+    }
+}
+
+
+
+
+
+// splitting default 세팅
+.custom-splitting {
+    overflow:hidden;
+    opacity: 0;
+
+    &.splitting {
+        opacity: 1;
+
+        .word {
+            overflow: hidden;
+            line-height: inherit;
+            display: inline-block;
+        }
+
+        .char {
+            display: inline-block;
+            position: relative;
+            font-size: inherit;
+            font-family: inherit;
+            font-weight: inherit;
+            opacity: 0;
+        }
+    }
+}
+
+// 애니메이션 적용
+//.custom-splitting.splitting {
+//    .char {
+//        @include animations.text-active;
+//        animation: text-active-ani 1.5s cubic-bezier(0.4, 0, 0.2, 1) both;
+//        animation-delay: calc(60ms * var(--char-index));
+//    }
+//}

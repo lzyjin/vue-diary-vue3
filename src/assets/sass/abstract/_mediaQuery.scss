@@ -1,0 +1,32 @@
+@mixin media-query($break-point) {
+    @if $break-point== desktop-l {
+        @media (max-width: 1600px) {
+            @content
+        }
+    }
+    @if $break-point== desktop-s {
+        @media (max-width: 1250px) {
+            @content
+        }
+    }
+    @if $break-point== mobile-l {
+        @media (max-width: 768px) {
+            @content
+        }
+    }
+    @if $break-point== mobile-s {
+        @media (max-width: 500px) {
+            @content
+        }
+    }
+}
+
+// 사용법:
+//.container{
+//    width: 50%;
+//    height: 50vh;
+//
+//    @include media-query(md) {
+//        width: 100%;
+//    }
+//}
