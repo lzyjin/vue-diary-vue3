@@ -62,7 +62,7 @@
 <script>
 // import 'vue2-datepicker/index.css';
 import { mapGetters } from 'vuex';
-// import { debounce } from 'lodash';
+import _ from 'lodash';
 import EditModal from '@/components/modal/EditModal.vue';
 import FilterModal from '@/components/modal/FilterModal.vue';
 import ModalList from '@/components/ModalList.js';

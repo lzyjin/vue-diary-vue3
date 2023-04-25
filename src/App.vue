@@ -4,6 +4,17 @@
 
 import HeaderLayout from '@/layouts/HeaderLayout.vue';
 import ContentLayout from '@/layouts/contentLayout.vue';
+
+// computed: {
+//   modal() {
+//     return this.$store.getters['modal/getModal'];
+//   },
+// },
+// methods: {
+//   closeModal(modalName) {
+//     this.$store.commit('modal/closeModal', modalName);
+//   },
+// },
 </script>
 
 <template>
@@ -21,5 +32,5 @@ import ContentLayout from '@/layouts/contentLayout.vue';
 </template>
 
 <style scoped>
-@import 'assets/sass/style.css';
+@import './assets/sass/style.css';
 </style>

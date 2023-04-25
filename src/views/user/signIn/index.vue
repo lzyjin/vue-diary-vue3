@@ -1,3 +1,45 @@
+<script setup>
+import { ref } from 'vue';
+import router from "@/router/index.js";
+
+// data
+const id = ref('');
+const password = ref('');
+const alertId = ref('');
+const alertPassword = ref('');
+
+// methods
+const signIn = async () => {
+  if (id.value === '') {
+    alertId.value = '아이디를 입력하세요.';
+  }
+
+  if (password.value === '') {
+    alertPassword.value = '비밀번호를 입력하세요.';
+  }
+
+  if (id.value !== '' && password.value !== '') {
+    this.$store.dispatch('user/SIGN_IN', {
+      id: id.value,
+      password: password.value,
+    })
+      .then(() => {
+        if (confirm('로그인 되었습니다.')) {
+          router.push({
+            name: 'Calendar',
+          });
+        }
+      })
+      .catch(e => {
+        console.log(e);
+        alert(e.response.data.msg);
+        id.value = '';
+        password.value = '';
+      });
+  }
+};
+</script>
+
 <template>
   <div>
     <h1 class="page-title">로그인</h1>
@@ -23,57 +65,6 @@
     </div>
   </div>
 </template>
-
-<script>
-import router from "@/router/index.js";
-
-export default {
-  name: "index",
-  data() {
-    return {
-      id: '',
-      password: '',
-      alertId: '',
-      alertPassword: '',
-    }
-  },
-  methods: {
-    async signIn() {
-      console.log(this.id, this.password);
-
-      if (this.id === '') {
-        this.alertId = '아이디를 입력하세요.';
-      }
-
-      if (this.password === '') {
-        this.alertPassword = '비밀번호를 입력하세요.';
-      }
-
-      if (this.id !== '' && this.password !== '') {
-        this.$store.dispatch('user/SIGN_IN', {
-          id: this.id,
-          password: this.password,
-        })
-        .then(() => {
-          // console.log(response);
-
-          if (confirm('로그인 되었습니다.')) {
-            router.push({
-              name: 'Calendar',
-            });
-          }
-        })
-        .catch(e => {
-          console.log(e);
-          alert(e.response.data.msg);
-          this.id = '';
-          this.password = '';
-        });
-      }
-    },
-  },
-}
-</script>
 
 <style scoped>
 

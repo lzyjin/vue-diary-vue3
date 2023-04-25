@@ -1,93 +1,3 @@
-<template>
-    <div>
-        <div class="modal" :class="{ opened: opened }">
-            <div class="modal-top">
-                <button @click="closeModal('editModalOpened')" style="margin-left: auto">
-                    <i class="xi-close"></i>
-                </button>
-            </div>
-            <div class="modal-content">
-                <div class="category">
-                    <div class="c-item">
-                        <strong>카테고리 <span class="asterisk">*</span></strong>
-                        <div class="select-wrap">
-                            <select name="" id="" required v-model="modal.formData.category">
-                                <option value="" disabled hidden>카테고리 선택</option>
-                                <option :value="item.en" v-for="item in categories" :key="`${item.en}_${item.ko}`">
-                                    {{ item.ko }}
-                                </option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="c-item">
-                        <strong>일자 <span class="asterisk">*</span></strong>
-                        <date-picker
-                            v-model="modal.formData.regDate"
-                            valueType="format"
-                            placeholder="날짜 선택"
-                        ></date-picker>
-                    </div>
-
-                    <div class="c-item">
-                        <strong>주소 <span class="asterisk">*</span></strong>
-                        <div class="input-wrap address">
-                            <input
-                                type="text"
-                                name=""
-                                id=""
-                                @click="openModal('daumPostModalOpened')"
-                                readonly
-                                required
-                                placeholder="주소 검색"
-                                v-model="modal.formData.address"
-                            />
-                            <!--<input type="text" name="" id="" required placeholder="주소 입력" v-model="modal.formData.address">-->
-                        </div>
-                    </div>
-
-                    <div class="c-item">
-                        <strong>내용 <span class="asterisk">*</span></strong>
-                        <textarea
-                            name=""
-                            id=""
-                            required
-                            placeholder="추억할 내용을 적어보세요 :)"
-                            v-model="modal.formData.contents"
-                        ></textarea>
-                    </div>
-
-                    <div class="c-item">
-                        <strong>사진첨부</strong>
-                        <div class="add-photo">
-                            <div
-                                class="thumb"
-                                v-for="(v, i) in modal.thumbList"
-                                :key="i"
-                                :style="{ 'background-image': `url('${v}')` }"
-                            >
-                                <div class="btn-delete" @click="deletePhoto(i)">
-                                    <i class="xi-close"></i>
-                                </div>
-                            </div>
-                            <label for="btnFileUpload" v-if="modal.formData.fileList.length < 3">
-                                <i class="xi-plus"></i>
-                            </label>
-                            <input type="file" name="" id="btnFileUpload" multiple @change="uploadPhoto" />
-                        </div>
-                    </div>
-                </div>
-                <div class="btn-wrap">
-                    <button class="btn-save" @click="saveMemory">
-                        {{ currentMemory.memoryNo === 0 ? '등록하기' : '수정하기' }}
-                    </button>
-                </div>
-            </div>
-        </div>
-        <div class="dimmed"></div>
-    </div>
-</template>
-
 <script>
 // import DatePicker from 'vue2-datepicker';
 import DaumPostModal from '@/components/modal/DaumPostModal.vue';
@@ -110,7 +20,7 @@ export default {
         },
     },
     components: {
-        DatePicker,
+        // DatePicker,
         DaumPostModal,
     },
     computed: {
@@ -284,5 +194,95 @@ export default {
     },
 };
 </script>
+
+<template>
+    <div>
+        <div class="modal" :class="{ opened: opened }">
+            <div class="modal-top">
+                <button @click="closeModal('editModalOpened')" style="margin-left: auto">
+                    <i class="xi-close"></i>
+                </button>
+            </div>
+            <div class="modal-content">
+                <div class="category">
+                    <div class="c-item">
+                        <strong>카테고리 <span class="asterisk">*</span></strong>
+                        <div class="select-wrap">
+                            <select name="" id="" required v-model="modal.formData.category">
+                                <option value="" disabled hidden>카테고리 선택</option>
+                                <option :value="item.en" v-for="item in categories" :key="`${item.en}_${item.ko}`">
+                                    {{ item.ko }}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="c-item">
+                        <strong>일자 <span class="asterisk">*</span></strong>
+<!--                        <date-picker-->
+<!--                            v-model="modal.formData.regDate"-->
+<!--                            valueType="format"-->
+<!--                            placeholder="날짜 선택"-->
+<!--                        ></date-picker>-->
+                    </div>
+
+                    <div class="c-item">
+                        <strong>주소 <span class="asterisk">*</span></strong>
+                        <div class="input-wrap address">
+                            <input
+                                type="text"
+                                name=""
+                                id=""
+                                @click="openModal('daumPostModalOpened')"
+                                readonly
+                                required
+                                placeholder="주소 검색"
+                                v-model="modal.formData.address"
+                            />
+                            <!--<input type="text" name="" id="" required placeholder="주소 입력" v-model="modal.formData.address">-->
+                        </div>
+                    </div>
+
+                    <div class="c-item">
+                        <strong>내용 <span class="asterisk">*</span></strong>
+                        <textarea
+                            name=""
+                            id=""
+                            required
+                            placeholder="추억할 내용을 적어보세요 :)"
+                            v-model="modal.formData.contents"
+                        ></textarea>
+                    </div>
+
+                    <div class="c-item">
+                        <strong>사진첨부</strong>
+                        <div class="add-photo">
+                            <div
+                                class="thumb"
+                                v-for="(v, i) in modal.thumbList"
+                                :key="i"
+                                :style="{ 'background-image': `url('${v}')` }"
+                            >
+                                <div class="btn-delete" @click="deletePhoto(i)">
+                                    <i class="xi-close"></i>
+                                </div>
+                            </div>
+                            <label for="btnFileUpload" v-if="modal.formData.fileList.length < 3">
+                                <i class="xi-plus"></i>
+                            </label>
+                            <input type="file" name="" id="btnFileUpload" multiple @change="uploadPhoto" />
+                        </div>
+                    </div>
+                </div>
+                <div class="btn-wrap">
+                    <button class="btn-save" @click="saveMemory">
+                        {{ currentMemory.memoryNo === 0 ? '등록하기' : '수정하기' }}
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="dimmed"></div>
+    </div>
+</template>
 
 <style scoped></style>

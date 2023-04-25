@@ -1,12 +1,8 @@
 <script setup>
 import { computed } from 'vue';
-import { mapGetters } from "vuex";
+import {store} from "@/store/index.js";
 
-const menuState = computed({
-  ...mapGetters({
-    menuState: 'common/menuState',
-  }),
-});
+const menuState = computed(() => store.getters['common/menuState']);
 
 const openMenu = function () {
   this.$store.dispatch('common/OPEN_MENU');

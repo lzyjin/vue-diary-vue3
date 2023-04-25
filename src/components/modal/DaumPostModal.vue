@@ -45,7 +45,7 @@ const onComplete =  function (data) {
         component: EditModal,
         data: payload,
     });
-},
+};
 </script>
 
 <template>

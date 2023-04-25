@@ -22,12 +22,12 @@
                     </div>
                     <div class="c-item">
                         <strong>일자</strong>
-                        <date-picker
-                            v-model="modal.regDate"
-                            valueType="format"
-                            range
-                            placeholder="날짜 선택"
-                        ></date-picker>
+<!--                        <date-picker-->
+<!--                            v-model="modal.regDate"-->
+<!--                            valueType="format"-->
+<!--                            range-->
+<!--                            placeholder="날짜 선택"-->
+<!--                        ></date-picker>-->
                     </div>
                     <div class="c-item">
                         <strong>주소</strong>
@@ -66,7 +66,7 @@ export default {
         },
     },
     components: {
-        DatePicker,
+        // DatePicker,
     },
     data() {
         return {

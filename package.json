@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@vuepic/vue-datepicker": "^4.5.0",
+    "lodash": "^4.17.21",
     "vue": "^3.2.47",
     "vue-observe-visibility": "^1.0.0",
     "vue-router": "^4.1.6",
