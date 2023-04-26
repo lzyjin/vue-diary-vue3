@@ -31,6 +31,6 @@ import ContentLayout from '@/layouts/contentLayout.vue';
   </div>
 </template>
 
-<style scoped>
+<style>
 @import './assets/sass/style.css';
 </style>
